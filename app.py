@@ -11,7 +11,7 @@ from flask import (Flask, redirect, render_template, request,
 # Combine the token with the connection string from the environment variables added by Service Connector to establish the connection.
 #conn_string = os.getenv('AZURE_POSTGRESQL_CONNECTIONSTRING')
 #conn = psycopg2.connect(conn_string + ' password=' + accessToken.token) 
-print(os.environ)
+
 
 app = Flask(__name__)
 
@@ -28,7 +28,7 @@ def favicon():
 @app.route('/hello', methods=['POST'])
 def hello():
 
-   version = "unknown"
+   version = os.environ
 #   with conn.cursor() as curs:
 #      try:
 #         # simple single row system query
@@ -40,7 +40,8 @@ def hello():
 #      # a more robust way of handling errors
 #      except (Exception, psycopg2.DatabaseError) as error:
 #         print(error)
-   name = request.form.get('name') + " " + version
+   env = ' '.join(map(str,os.environ))
+   name = request.form.get('name') + " " + version + " " + env
 
    if name:
        print('Request for hello page received with name=%s' % name)
