@@ -40,7 +40,7 @@ def hello():
       # a more robust way of handling errors
       except (Exception, psycopg2.DatabaseError) as error:
          print(error)
-     name = "Wibble " + request.form.get('name') + " " + version
+   name = request.form.get('name') + " " + version
 
    if name:
        print('Request for hello page received with name=%s' % name)
