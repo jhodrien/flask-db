@@ -8,9 +8,9 @@ from flask import (Flask, redirect, render_template, request,
 
 cred = DefaultAzureCredential()
 accessToken = cred.get_token('https://ossrdbms-aad.database.windows.net/.default')
+conn_string = os.getenv('AZURE_POSTGRESQL_CONNECTIONSTRING')
 
 # Combine the token with the connection string from the environment variables added by Service Connector to establish the connection.
-
 conn = psycopg2.connect(conn_string + ' password=' + accessToken.token) 
 
 app = Flask(__name__)
