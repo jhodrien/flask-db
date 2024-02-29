@@ -41,7 +41,7 @@ def hello():
       except (Exception, psycopg2.DatabaseError) as error:
          print(error)
 
-   name = request.form.get('name') + " " + version + " " + conn_string
+   name = request.form.get('name') + " " + version[0] + " " + conn_string
 
    if name:
        print('Request for hello page received with name=%s' % name)
