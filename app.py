@@ -1,4 +1,5 @@
 import os
+import sys
 from azure.identity import DefaultAzureCredential
 import psycopg2
 
