@@ -10,7 +10,7 @@ cred = DefaultAzureCredential()
 accessToken = cred.get_token('https://ossrdbms-aad.database.windows.net/.default')
 
 # Combine the token with the connection string from the environment variables added by Service Connector to establish the connection.
-print(os.getenv('AZURE_POSTGRESQL_CONNECTIONSTRING'), file=sys.stderr)
+
 conn_string = os.getenv('AZURE_POSTGRESQL_CONNECTIONSTRING')
 #conn = psycopg2.connect(conn_string + ' password=' + accessToken.token) 
 
@@ -42,7 +42,7 @@ def hello():
 #      except (Exception, psycopg2.DatabaseError) as error:
 #         print(error)
 
-   name = request.form.get('name') + " " + version
+   name = request.form.get('name') + " " + version + " " + conn_string
 
    if name:
        print('Request for hello page received with name=%s' % name)
