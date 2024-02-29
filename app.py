@@ -9,8 +9,9 @@ cred = DefaultAzureCredential()
 accessToken = cred.get_token('https://ossrdbms-aad.database.windows.net/.default')
 
 # Combine the token with the connection string from the environment variables added by Service Connector to establish the connection.
+print(os.getenv('AZURE_POSTGRESQL_CONNECTIONSTRING'), file=sys.stderr).
 conn_string = os.getenv('AZURE_POSTGRESQL_CONNECTIONSTRING')
-conn = psycopg2.connect(conn_string + ' password=' + accessToken.token) 
+#conn = psycopg2.connect(conn_string + ' password=' + accessToken.token) 
 
 app = Flask(__name__)
 
@@ -28,17 +29,17 @@ def favicon():
 def hello():
 
    version = "unknown"
-   with conn.cursor() as curs:
-      try:
-         # simple single row system query
-         curs.execute("SELECT version()")
-
-         # returns a single row as a tuple
-         version = curs.fetchone()
-
-      # a more robust way of handling errors
-      except (Exception, psycopg2.DatabaseError) as error:
-         print(error)
+#   with conn.cursor() as curs:
+#      try:
+#         # simple single row system query
+#         curs.execute("SELECT version()")
+#
+#         # returns a single row as a tuple
+#         version = curs.fetchone()
+#
+#      # a more robust way of handling errors
+#      except (Exception, psycopg2.DatabaseError) as error:
+#         print(error)
 
    name = request.form.get('name') + " " + version
 
