@@ -6,12 +6,15 @@ import psycopg2
 from flask import (Flask, redirect, render_template, request,
                    send_from_directory, url_for)
 
-cred = DefaultAzureCredential()
-accessToken = cred.get_token('https://ossrdbms-aad.database.windows.net/.default')
+# cred = DefaultAzureCredential()
+# accessToken = cred.get_token('https://ossrdbms-aad.database.windows.net/.default')
 conn_string = os.getenv('AZURE_POSTGRESQL_CONNECTIONSTRING')
 
 # Combine the token with the connection string from the environment variables added by Service Connector to establish the connection.
-conn = psycopg2.connect(conn_string + ' password=' + accessToken.token) 
+# conn = psycopg2.connect(conn_string + ' password=' + accessToken.token) 
+
+# For a secret auth, we can just use the provided connection string
+conn = psycopg2.connect(conn_string)
 
 app = Flask(__name__)
 
